@@ -47,11 +47,11 @@ var MenuScreen = me.ScreenObject.extend(
 		this.play.draw(context);
 
 		// game version
-		var versionText = "v0.2";
+		var versionText = "v0.3";
 		var versionSize = this.version.measureText(context, versionText);
 
 		this.version.draw(context, versionText,
-			me.video.getWidth() - versionSize.width - 3, me.video.getHeight() - versionSize.height - 5);
+			me.video.getWidth() - versionSize.width - 3, me.video.getHeight() - 5);
 	},
 
 	/*

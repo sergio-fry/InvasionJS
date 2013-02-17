@@ -294,8 +294,7 @@ var Implosion = me.AnimationSheet.extend(
 		this.parent(x, y, image, 45, 42);
 
 		// add animation with all sprites
-		this.addAnimation("implosion", null);
-		this.animationspeed = 0.4;
+		this.addAnimation("implosion", null, 0.4);
 
 		// set animation
 		this.setCurrentAnimation("implosion", function() {

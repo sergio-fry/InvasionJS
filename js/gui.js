@@ -59,7 +59,10 @@ var ScoreObject = me.HUD_Item.extend(
 	 */
 	draw: function(context, x, y)
 	{
-		this.score.draw(context, "Score : " + this.value, this.pos.x + x, this.pos.y + y);
+		var scoreText = "Score : " + this.value;
+		var scoreSize = this.score.measureText(context, scoreText);
+
+		this.score.draw(context, scoreText, this.pos.x, scoreSize.height);
 	}
 });
 
