@@ -189,8 +189,7 @@ var EnemyEntity = me.ObjectEntity.extend(
 		this.parent(x, y, settings);
 
 		// add animation with all sprites
-		this.addAnimation("flying", null);
-		this.animationspeed = 0.2;
+		this.addAnimation("flying", null, 0.2);
 		this.setCurrentAnimation("flying");
 
 		// init variables
