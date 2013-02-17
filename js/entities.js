@@ -215,7 +215,7 @@ var EnemyEntity = me.ObjectEntity.extend(
 
 		// if the enemy object goes out from the screen,
 		// remove it from the game manager
-		if (this.pos.x < 0)
+		if (this.pos.x < -this.width)
 			me.game.remove(this);
 
 		// check & update missile movement
