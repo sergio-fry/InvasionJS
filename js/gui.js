@@ -9,7 +9,7 @@ var LifeObject = me.HUD_Item.extend(
 	init: function(lives)
 	{
 		// call the parent constructor
-		this.parent(655, 5, lives);
+		this.parent(me.video.getWidth() - 145, 5, lives);
 
 		// create image
 		this.image = me.loader.getImage("life" + lives);
