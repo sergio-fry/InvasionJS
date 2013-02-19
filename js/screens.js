@@ -47,7 +47,7 @@ var MenuScreen = me.ScreenObject.extend(
 		this.play.draw(context);
 
 		// game version
-		var versionText = "v0.3";
+		var versionText = "0.3";
 		var versionSize = this.version.measureText(context, versionText);
 
 		this.version.draw(context, versionText,
@@ -156,7 +156,7 @@ var GameOverScreen = me.ScreenObject.extend(
 		this.menu.draw(context);
 
 		// draw end label
-		var endText = "Partie terminée !";
+		var endText = "Level completed !";
 		var endSize = this.end.measureText(context, endText);
 
 		this.end.draw(context, endText,
