@@ -50,12 +50,15 @@ var jsApp =
 			return;
 		}
 
-        // initialize the audio
-        me.audio.init("mp3,ogg");
+		// initialize the audio
+		me.audio.init("mp3,ogg");
 
 		// set all resources to be loaded
 		me.loader.onload = this.loaded.bind(this);
 		me.loader.preload(g_resources);
+
+		// set the "Loading" Screen Object
+		me.state.set(me.state.LOADING, new LoadingScreen());
 
 		// load everything & display a loading screen
 		me.state.change(me.state.LOADING);

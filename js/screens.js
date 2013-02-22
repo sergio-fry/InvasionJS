@@ -1,4 +1,37 @@
 /*
+ * loading screen
+ */
+var LoadingScreen = me.ScreenObject.extend(
+{
+	/*
+	 * constructor
+	 */
+	init: function()
+	{
+		this.parent(true);
+		this.bg = new Image();
+		this.bg.src = "img/bkg0.png";
+		this.loading = new me.Font("Verdana", 20, "white");
+	},
+
+	/*
+	 * drawing function
+	 */
+	draw: function(context)
+	{
+		// clear the screen
+		me.video.clearSurface(context, "black");
+		context.drawImage(this.bg, 0, 0);
+
+		var loadingText = "Loading...";
+		var loadingSize = this.loading.measureText(context, loadingText);
+		this.loading.draw(context, loadingText,
+			(me.video.getWidth() / 2) - (loadingSize.width / 2),
+			(me.video.getHeight() - loadingSize.height) / 2);
+	}
+});
+
+/*
  * menu screen
  */
 var MenuScreen = me.ScreenObject.extend(
