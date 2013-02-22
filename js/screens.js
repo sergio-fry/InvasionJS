@@ -27,7 +27,7 @@ var LoadingScreen = me.ScreenObject.extend(
 		var loadingSize = this.loading.measureText(context, loadingText);
 		this.loading.draw(context, loadingText,
 			(me.video.getWidth() / 2) - (loadingSize.width / 2),
-			(me.video.getHeight() - loadingSize.height) / 2);
+			(me.video.getHeight() / 2) - (loadingSize.height / 2));
 	}
 });
 
