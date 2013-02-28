@@ -196,7 +196,7 @@ var EnemyEntity = me.ObjectEntity.extend(
 		this.gravity = 0;
 
 		// set the default horizontal speed (accel vector)
-		this.setVelocity(3, 0);
+		this.setVelocity(2.5, 0);
 
 		// enable collision
 		this.collidable = true;
