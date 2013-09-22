@@ -10,4 +10,4 @@ Online demo : http://invasion.semche.com/
 
 ## Developers :
 - Gwillald, www.gwillald.com
-- Semche, semche.com
+- Semche, [semche.com](http://semche.com/)
