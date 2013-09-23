@@ -263,7 +263,6 @@ var EnemyFleet = Object.extend(
 	{
 		// init variables
 		this.fps = 0;
-		this.maxY = (me.video.getHeight() / 10) - 5;
 		this.alwaysUpdate = true;
 	},
 
@@ -273,10 +272,10 @@ var EnemyFleet = Object.extend(
 	update: function()
 	{
 		// every 1/12 second
-		if ((this.fps++) % 12 == 0)
+		if ((this.fps++) % 18 == 0)
 		{
 			var x = me.video.getWidth();
-			var y = Number.prototype.random(0, this.maxY) * 10;
+			var y = parseInt(Math.random() * (me.video.getHeight() - 42));
 
 			// add an enemy
 			me.game.add(new EnemyEntity(x, y), 10);
