@@ -31,13 +31,13 @@ var g_resources = [
 
 	// audio
 	{name: "clash", type:"audio", src: "sound/", channel: 1},
-	{name: "missile", type:"audio", src: "sound/", channel: 10},
-	{name: "implosion", type:"audio", src: "sound/", channel: 10}
+	{name: "missile", type:"audio", src: "sound/", channel: 5},
+	{name: "implosion", type:"audio", src: "sound/", channel: 3}
 ];
 
 
 var jsApp =
-{	
+{
 	/*
 	 * Initialize the jsApp
 	 */
@@ -98,7 +98,7 @@ var jsApp =
 }; // jsApp
 
 // bootstrap :)
-window.onReady(function() 
+window.onReady(function()
 {
 	jsApp.onload();
 });

@@ -48,7 +48,7 @@ var ScoreObject = me.HUD_Item.extend(
 	init: function()
 	{
 		// call the parent constructor
-		this.parent(5, 0);
+		this.parent(0, 0);
 
 		// create a font
 		this.score = new me.Font("Verdana", 20, "white");
@@ -62,7 +62,7 @@ var ScoreObject = me.HUD_Item.extend(
 		var scoreText = "Score : " + this.value;
 		var scoreSize = this.score.measureText(context, scoreText);
 
-		this.score.draw(context, scoreText, this.pos.x, scoreSize.height);
+		this.score.draw(context, scoreText, 3, 3);
 	}
 });
 
@@ -86,7 +86,7 @@ var Button = me.Rect.extend(
 		this.parent(this.pos, this.image.width, this.image.height);
 
 		// register mouse event
-		me.input.registerMouseEvent("mousedown", this, this.clicked.bind(this));
+		me.input.registerPointerEvent("mousedown", this, this.clicked.bind(this));
 	},
 
 	/*
@@ -104,7 +104,7 @@ var Button = me.Rect.extend(
 	draw: function(context)
 	{
 		// on button hovered
-		if (this.containsPoint(me.input.mouse.pos))
+		if (this.containsPointV(me.input.mouse.pos))
 			context.drawImage(this.image_hover, this.pos.x, this.pos.y);
 		else
 			context.drawImage(this.image, this.pos.x, this.pos.y);
@@ -116,7 +116,7 @@ var Button = me.Rect.extend(
 	onDestroyEvent: function()
 	{
 		// release mouse events
-		me.input.releaseMouseEvent("mousedown", this);
+		me.input.releasePointerEvent("mousedown", this);
 	}
 });
 
@@ -147,11 +147,11 @@ var BackgroundLayer = me.ImageLayer.extend(
 	update: function()
 	{
 		// recalibrate image position
-		if (this.offset.x >= this.imagewidth)
-			this.offset.x = 0;
+		if (this.pos.x >= this.imagewidth - 1)
+			this.pos.x = 0;
 
 		// increment horizontal background position
-		this.offset.x += this.speed;
+		this.pos.x += this.speed;
 
 		return true;
 	}

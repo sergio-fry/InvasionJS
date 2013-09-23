@@ -13,6 +13,7 @@ var MissileEntity = me.ObjectEntity.extend(
 
 		// set the default horizontal speed (accel vector)
 		this.setVelocity(7, 0);
+		this.anchorPoint.set(0.0, 0.0);
 	},
 
 	/*
@@ -59,14 +60,22 @@ var PlayerEntity = me.ObjectEntity.extend(
 	 */
 	init: function(x, y)
 	{
+		// player entity settings
+		var settings = {};
+		settings.image = me.loader.getImage("ship");
+		settings.spritewidth = 36;
+		settings.spriteheight = 36;
+
 		// call the parent constructor
-		this.parent(x, y, {image: "ship"});
+		this.parent(x, y, settings);
 
 		// set the default horizontal & vertical speed (accel vector)
 		this.setVelocity(3, 3);
+		this.anchorPoint.set(0.0, 0.0);
 
 		// init variables
 		this.gravity = 0;
+		this.alwaysUpdate = true;
 
 		// enable collision
 		this.collidable = true;
@@ -77,8 +86,12 @@ var PlayerEntity = me.ObjectEntity.extend(
 	 */
 	update: function()
 	{
+		// accel vectors
+		this.vel.x = 0;
+		this.vel.y = 0;
+
 		// move left
-		if (me.input.isKeyPressed("left"))
+		if (me.input.isKeyPressed("left") && !me.input.isKeyPressed("right"))
 		{
 			// update the entity velocity
 			this.vel.x -= this.accel.x * me.timer.tick;
@@ -86,18 +99,15 @@ var PlayerEntity = me.ObjectEntity.extend(
 				this.pos.x = 0;
 		}
 		// move right
-		else if (me.input.isKeyPressed("right"))
+		if (me.input.isKeyPressed("right") && !me.input.isKeyPressed("left"))
 		{
 			// update the entity velocity
 			this.vel.x += this.accel.x * me.timer.tick;
-			if (this.pos.x > me.video.getWidth() - this.image.width)
-				this.pos.x = me.video.getWidth() - this.image.width;
+			if (this.pos.x > me.video.getWidth() - this.renderable.width)
+				this.pos.x = me.video.getWidth() - this.renderable.width;
 		}
-		else
-			this.vel.x = 0;
-
 		// move up
-		if (me.input.isKeyPressed("up"))
+		if (me.input.isKeyPressed("up") && !me.input.isKeyPressed("down"))
 		{
 			// update the entity velocity
 			this.vel.y -= this.accel.y * me.timer.tick;
@@ -105,15 +115,13 @@ var PlayerEntity = me.ObjectEntity.extend(
 				this.pos.y = 0;
 		}
 		// move down
-		else if (me.input.isKeyPressed("down"))
+		if (me.input.isKeyPressed("down") && !me.input.isKeyPressed("up"))
 		{
 			// update the entity velocity
 			this.vel.y += this.accel.y * me.timer.tick;
-			if (this.pos.y > me.video.getHeight() - this.image.height)
-				this.pos.y = me.video.getHeight() - this.image.height;
+			if (this.pos.y > me.video.getHeight() - this.renderable.height)
+				this.pos.y = me.video.getHeight() - this.renderable.height;
 		}
-		else
-			this.vel.y = 0;
 
 		// fire
 		if (me.input.isKeyPressed("fire"))
@@ -122,7 +130,8 @@ var PlayerEntity = me.ObjectEntity.extend(
 			me.audio.play("missile");
 
 			// create a missile entity
-			var missile = new MissileEntity(this.pos.x + 34, this.pos.y + 15);
+			var missile = new MissileEntity(this.pos.x + this.width,
+												this.pos.y + this.height / 2 - 3);
 			me.game.add(missile, this.z);
 			me.game.sort();
 		}
@@ -180,7 +189,7 @@ var EnemyEntity = me.ObjectEntity.extend(
 	{
 		// enemy entity settings
 		var settings = {};
-		settings.image = "enemy";
+		settings.image = me.loader.getImage("enemy");
 		settings.spritewidth = 45;
 		settings.spriteheight = 42;
 		settings.type = me.game.ENEMY_OBJECT;
@@ -189,14 +198,16 @@ var EnemyEntity = me.ObjectEntity.extend(
 		this.parent(x, y, settings);
 
 		// add animation with all sprites
-		this.addAnimation("flying", null, 0.2);
-		this.setCurrentAnimation("flying");
+		this.renderable.addAnimation("flying", null, 0.2);
+		this.renderable.setCurrentAnimation("flying");
 
 		// init variables
 		this.gravity = 0;
+		this.alwaysUpdate = true;
 
 		// set the default horizontal speed (accel vector)
 		this.setVelocity(2.5, 0);
+		this.anchorPoint.set(0.0, 0.0);
 
 		// enable collision
 		this.collidable = true;
@@ -215,7 +226,7 @@ var EnemyEntity = me.ObjectEntity.extend(
 
 		// if the enemy object goes out from the screen,
 		// remove it from the game manager
-		if (this.pos.x < -this.width)
+		if (!this.visible)
 			me.game.remove(this);
 
 		// check & update missile movement
@@ -230,16 +241,13 @@ var EnemyEntity = me.ObjectEntity.extend(
 	 */
 	remove: function()
 	{
-		// remove this entity
-		me.game.remove(this, true);
-
-		// play sound
-		me.audio.play("implosion");
-
 		// init implosion
 		var implosion = new Implosion(this.pos.x, this.pos.y);
 		me.game.add(implosion, 15);
 		me.game.sort();
+
+		// remove this entity
+		me.game.remove(this);
 	}
 });
 
@@ -256,6 +264,7 @@ var EnemyFleet = Object.extend(
 		// init variables
 		this.fps = 0;
 		this.maxY = (me.video.getHeight() / 10) - 5;
+		this.alwaysUpdate = true;
 	},
 
 	/*
@@ -266,7 +275,7 @@ var EnemyFleet = Object.extend(
 		// every 1/12 second
 		if ((this.fps++) % 12 == 0)
 		{
-			var x = me.video.getWidth() + 10;
+			var x = me.video.getWidth();
 			var y = Number.prototype.random(0, this.maxY) * 10;
 
 			// add an enemy
@@ -292,13 +301,16 @@ var Implosion = me.AnimationSheet.extend(
 		var image = me.loader.getImage("implosion");
 		this.parent(x, y, image, 45, 42);
 
+		// play sound
+		me.audio.play("implosion");
+
 		// add animation with all sprites
 		this.addAnimation("implosion", null, 0.4);
 
 		// set animation
-		this.setCurrentAnimation("implosion", function() {
+		this.setCurrentAnimation("implosion", (function() {
 			me.game.remove(this);
-			me.game.sort();
-		});
+			return false;
+		}).bind(this));
 	}
 });

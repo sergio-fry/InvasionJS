@@ -80,11 +80,11 @@ var MenuScreen = me.ScreenObject.extend(
 		this.play.draw(context);
 
 		// game version
-		var versionText = "0.3";
+		var versionText = "0.4";
 		var versionSize = this.version.measureText(context, versionText);
 
 		this.version.draw(context, versionText,
-			me.video.getWidth() - versionSize.width - 3, me.video.getHeight() - 5);
+			me.video.getWidth() - versionSize.width - 2, me.video.getHeight() - versionSize.height);
 	},
 
 	/*
@@ -93,7 +93,7 @@ var MenuScreen = me.ScreenObject.extend(
 	onDestroyEvent: function()
 	{
 		// release mouse event
-		me.input.releaseMouseEvent("mousedown", this.play);
+		me.input.releasePointerEvent("mousedown", this.play);
 	}
 });
 
@@ -120,8 +120,7 @@ var PlayScreen = me.ScreenObject.extend(
 		me.game.add(new BackgroundObject(), 1);
 
 		// add main player
-		var ship = new PlayerEntity(100, 265);
-		me.game.add(ship, 10);
+		me.game.add(new PlayerEntity(100, 205), 10);
 
 		// add enemy fleet
 		me.game.add(new EnemyFleet(), 10);
@@ -133,13 +132,14 @@ var PlayScreen = me.ScreenObject.extend(
     /*
      * action to perform when game is finished (state change)
      */
-	onDestroyEvent: function() {
+	onDestroyEvent: function()
+	{
 		// remove the HUD
 		me.game.disableHUD();
 	}
 });
 
-/* 
+/*
  * game over screen
  */
 var GameOverScreen = me.ScreenObject.extend(
@@ -209,7 +209,7 @@ var GameOverScreen = me.ScreenObject.extend(
 	onDestroyEvent: function()
 	{
 		// release mouse event
-		me.input.releaseMouseEvent("mousedown", this.restart);
-		me.input.releaseMouseEvent("mousedown", this.menu);
+		me.input.releasePointerEvent("mousedown", this.restart);
+		me.input.releasePointerEvent("mousedown", this.menu);
 	}
 });
