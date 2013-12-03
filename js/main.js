@@ -24,8 +24,10 @@ var g_resources = [
 	{name: "life3", type:"image", src: "img/life3.png"},
 
 	// game
-	{name: "ship", type:"image", src: "img/ship.png"},
-	{name: "enemy", type:"image", src: "img/enemy.png"},
+	//{name: "ship", type:"image", src: "img/ship.png"},
+	{name: "ship", type:"image", src: "img/kazak.png"},
+	//{name: "enemy", type:"image", src: "img/enemy.png"},
+	{name: "enemy", type:"image", src: "img/klichko.png"},
 	{name: "missile", type:"image", src: "img/missile.png"},
 	{name: "implosion", type:"image", src: "img/implosion.png"},
 
