@@ -36,7 +36,8 @@ var g_resources = [
 	// audio
 	{name: "clash", type:"audio", src: "sound/", channel: 1},
 	{name: "missile", type:"audio", src: "sound/", channel: 5},
-	{name: "implosion", type:"audio", src: "sound/", channel: 3}
+	{name: "implosion", type:"audio", src: "sound/", channel: 3},
+	{name: "theme", type:"audio", src: "sound/", channel: 4}
 ];
 
 
