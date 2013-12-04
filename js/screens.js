@@ -163,9 +163,10 @@ var GameOverScreen = me.ScreenObject.extend(
 	/*
 	 * reset function
 	 */
-	onResetEvent: function(score)
+	onResetEvent: function(score, boss_killed)
 	{
 		this.finalScore = score;
+		this.boss_killed = boss_killed;
 
 		// add parallax background
 		me.game.add(new BackgroundObject(), 1);
@@ -173,6 +174,7 @@ var GameOverScreen = me.ScreenObject.extend(
 		// labels
 		this.end = new me.Font("Verdana", 25, "white");
 		this.score = new me.Font("Verdana", 22, "white");
+		this.share = new me.Font("Verdana", 22, "red");
 
 		// buttons
 		this.restart = new Button("restart", me.state.PLAY, 280);
@@ -189,7 +191,13 @@ var GameOverScreen = me.ScreenObject.extend(
 		//this.menu.draw(context);
 
 		// draw end label
-		var endText = "Вы можете лучше!";
+		var endText;
+    if(this.boss_killed) {
+      endText = "Поздравляем! Украина свободна!!!";
+    } else {
+      endText = "Постарайтесь подстрелить зека с косичкой.";
+    }
+
 		var endSize = this.end.measureText(context, endText);
 
 		this.end.draw(context, endText,
@@ -201,6 +209,12 @@ var GameOverScreen = me.ScreenObject.extend(
 
 		this.score.draw(context, scoreText,
 			me.video.getWidth() / 2 - scoreSize.width / 2, 150);
+
+    var share_text = "Дай другу отстоять Украину-матушку! =)";
+		var share_size = this.end.measureText(context, share_text);
+
+		this.end.draw(context, share_text,
+			me.video.getWidth() / 2 - share_size.width / 2, 220);
 	},
 
 	/*

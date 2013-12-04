@@ -44,6 +44,12 @@ var MissileEntity = me.ObjectEntity.extend(
 
 			// update score
 			me.game.HUD.updateItemValue("score", res.obj.score);
+
+      if(res.obj.finale) {
+				me.state.change(me.state.GAMEOVER,
+					me.game.HUD.getItemValue("score"), true);
+				return;
+      }
 		}
 
 		return true;
@@ -171,6 +177,15 @@ var PlayerEntity = me.ObjectEntity.extend(
 				return;
 			}
 
+			// enemy3 killed
+			if (me.game.HUD.getItemValue("level_cleared"))
+			{
+				// game over
+				me.state.change(me.state.GAMEOVER,
+					me.game.HUD.getItemValue("score"));
+				return;
+			}
+
 			// remove enemy
 			res.obj.remove();
 		}
@@ -183,6 +198,8 @@ var PlayerEntity = me.ObjectEntity.extend(
 var EnemyEntity = me.ObjectEntity.extend(
 {
   image: "enemy",
+  width: 45,
+  height: 42,
 	/*
 	 * constructor
 	 */
@@ -191,8 +208,8 @@ var EnemyEntity = me.ObjectEntity.extend(
 		// enemy entity settings
 		var settings = options || {};
 		settings.image = me.loader.getImage(this.image);
-		settings.spritewidth = 45;
-		settings.spriteheight = 42;
+		settings.spritewidth = this.width;
+		settings.spriteheight = this.height;
 		settings.type = me.game.ENEMY_OBJECT;
 
 		// call parent constructor
@@ -256,11 +273,14 @@ var EnemyEntity = me.ObjectEntity.extend(
 		// remove this entity
 		me.game.remove(this);
 	},
-  score: 10
+  score: 10,
+  finale: false
 });
 
 var Enemy2Entity = EnemyEntity.extend({
   image: "enemy2",
+  width: 45,
+  height: 58,
 	/*
 	 * constructor
 	 */
@@ -276,11 +296,14 @@ var Enemy2Entity = EnemyEntity.extend({
     }
   },
 
-  score: 20
+  score: 20,
+  finale: false
 });
 
 var Enemy3Entity = EnemyEntity.extend({
   image: "enemy3",
+  width: 71,
+  height: 55,
 	/*
 	 * constructor
 	 */
@@ -296,7 +319,8 @@ var Enemy3Entity = EnemyEntity.extend({
     }
   },
 
-  score: 100
+  score: 100,
+  finale: true
 });
 
 /*
@@ -321,8 +345,21 @@ var EnemyFleet = Object.extend(
 	{
     var seed = this.round++;
 
+    var score = me.game.HUD.getItemValue("score");
+
+    var level;
+
+    if(score < 50) {
+      level = 1;
+    } else if(score >= 50 && score < 200) {
+      level = 2;
+    } else if(score >= 200) {
+      level = 3;
+    }
+    
+
 		// every 1/N round
-		if ((seed) % 50 == 0)
+		if ((seed) % Math.round(50/level) == 0)
 		{
 			var x = me.video.getWidth();
 			var y = parseInt(Math.random() * (me.video.getHeight() - 42));
@@ -333,7 +370,7 @@ var EnemyFleet = Object.extend(
 		}
 
 		// every 1/N round
-		if ((seed) % 100 == 0)
+		if (level >= 2 && (seed) % Math.round(100/level) == 0)
 		{
 			var x = me.video.getWidth();
 			var y = parseInt(Math.random() * (me.video.getHeight() - 42));
@@ -344,7 +381,7 @@ var EnemyFleet = Object.extend(
 		}
 
 		// every 1/N round
-		if ((seed) % 200 == 0)
+		if (level >= 3 && (seed) % 100 == 0)
 		{
 			var x = me.video.getWidth();
 			var y = parseInt(Math.random() * (me.video.getHeight() - 42));

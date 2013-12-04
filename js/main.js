@@ -5,8 +5,8 @@
 // game resources
 var g_resources = [
 	// parallax background
-	{name: "bkg0", type:"image", src: "img/bkg0.png"},
-	{name: "bkg1", type:"image", src: "img/bkg1.png"},
+	{name: "bkg0", type:"image", src: "img/bg.jpg"},
+	{name: "bkg1", type:"image", src: "img/bg2.png"},
 
 	// interface
 	{name: "title", type:"image", src: "img/title.png"},
