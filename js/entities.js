@@ -43,7 +43,7 @@ var MissileEntity = me.ObjectEntity.extend(
 			me.game.remove(this);
 
 			// update score
-			me.game.HUD.updateItemValue("score", 10);
+			me.game.HUD.updateItemValue("score", res.obj.score);
 		}
 
 		return true;
@@ -182,14 +182,15 @@ var PlayerEntity = me.ObjectEntity.extend(
  */
 var EnemyEntity = me.ObjectEntity.extend(
 {
+  image: "enemy",
 	/*
 	 * constructor
 	 */
-	init: function(x, y)
+	init: function(x, y, options)
 	{
 		// enemy entity settings
-		var settings = {};
-		settings.image = me.loader.getImage("enemy");
+		var settings = options || {};
+		settings.image = me.loader.getImage(this.image);
 		settings.spritewidth = 45;
 		settings.spriteheight = 42;
 		settings.type = me.game.ENEMY_OBJECT;
@@ -224,6 +225,12 @@ var EnemyEntity = me.ObjectEntity.extend(
 		// calculate velocity
 		this.vel.x -= this.accel.x * me.timer.tick;
 
+    if(this.accel.y > 0) {
+      this.vel.y -= this.accel.y * me.timer.tick;
+    } else {
+      this.vel.y += this.accel.y * me.timer.tick;
+    }
+
 		// if the enemy object goes out from the screen,
 		// remove it from the game manager
 		if (!this.visible)
@@ -248,7 +255,48 @@ var EnemyEntity = me.ObjectEntity.extend(
 
 		// remove this entity
 		me.game.remove(this);
-	}
+	},
+  score: 10
+});
+
+var Enemy2Entity = EnemyEntity.extend({
+  image: "enemy2",
+	/*
+	 * constructor
+	 */
+	init: function(x, y, options)
+	{
+		// call parent constructor
+		this.parent(x, y, options);
+    
+    if(Math.random() > 0.5) {
+      this.setVelocity(3.5, 1.5);
+    } else {
+      this.setVelocity(3.5, -1.5);
+    }
+  },
+
+  score: 20
+});
+
+var Enemy3Entity = EnemyEntity.extend({
+  image: "enemy3",
+	/*
+	 * constructor
+	 */
+	init: function(x, y, options)
+	{
+		// call parent constructor
+		this.parent(x, y, options);
+    
+    if(Math.random() > 0.5) {
+      this.setVelocity(6.5, 1.5);
+    } else {
+      this.setVelocity(6.5, -1.5);
+    }
+  },
+
+  score: 100
 });
 
 /*
@@ -262,7 +310,7 @@ var EnemyFleet = Object.extend(
 	init: function()
 	{
 		// init variables
-		this.fps = 0;
+		this.round = 0;
 		this.alwaysUpdate = true;
 	},
 
@@ -271,14 +319,38 @@ var EnemyFleet = Object.extend(
 	 */
 	update: function()
 	{
-		// every 1/12 second
-		if ((this.fps++) % 18 == 0)
+    var seed = this.round++;
+
+		// every 1/N round
+		if ((seed) % 50 == 0)
 		{
 			var x = me.video.getWidth();
 			var y = parseInt(Math.random() * (me.video.getHeight() - 42));
 
 			// add an enemy
 			me.game.add(new EnemyEntity(x, y), 10);
+			me.game.sort();
+		}
+
+		// every 1/N round
+		if ((seed) % 100 == 0)
+		{
+			var x = me.video.getWidth();
+			var y = parseInt(Math.random() * (me.video.getHeight() - 42));
+
+			// add an enemy
+			me.game.add(new Enemy2Entity(x, y), 10);
+			me.game.sort();
+		}
+
+		// every 1/N round
+		if ((seed) % 200 == 0)
+		{
+			var x = me.video.getWidth();
+			var y = parseInt(Math.random() * (me.video.getHeight() - 42));
+
+			// add an enemy
+			me.game.add(new Enemy3Entity(x, y), 10);
 			me.game.sort();
 		}
 

@@ -12,8 +12,8 @@ var g_resources = [
 	{name: "title", type:"image", src: "img/title.png"},
 	{name: "play", type:"image", src: "img/play.png"},
 	{name: "play_hover", type:"image", src: "img/play_hover.png"},
-	{name: "restart", type:"image", src: "img/restart.png"},
-	{name: "restart_hover", type:"image", src: "img/restart_hover.png"},
+	{name: "restart", type:"image", src: "img/play.png"},
+	{name: "restart_hover", type:"image", src: "img/play_hover.png"},
 	{name: "menu", type:"image", src: "img/menu.png"},
 	{name: "menu_hover", type:"image", src: "img/menu_hover.png"},
 
@@ -24,10 +24,12 @@ var g_resources = [
 	{name: "life3", type:"image", src: "img/life3.png"},
 
 	// game
-	//{name: "ship", type:"image", src: "img/ship.png"},
-	{name: "ship", type:"image", src: "img/kazak.png"},
-	//{name: "enemy", type:"image", src: "img/enemy.png"},
-	{name: "enemy", type:"image", src: "img/klichko.png"},
+	{name: "ship", type:"image", src: "img/ship.png"},
+
+	{name: "enemy", type:"image", src: "img/enemy.png"},
+	{name: "enemy2", type:"image", src: "img/enemy2.png"},
+	{name: "enemy3", type:"image", src: "img/enemy3.png"},
+
 	{name: "missile", type:"image", src: "img/missile.png"},
 	{name: "implosion", type:"image", src: "img/implosion.png"},
 

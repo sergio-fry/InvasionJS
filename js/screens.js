@@ -23,7 +23,7 @@ var LoadingScreen = me.ScreenObject.extend(
 		me.video.clearSurface(context, "black");
 		context.drawImage(this.bg, 0, 0);
 
-		var loadingText = "Loading...";
+		var loadingText = "Загрузка...";
 		var loadingSize = this.loading.measureText(context, loadingText);
 		this.loading.draw(context, loadingText,
 			(me.video.getWidth() / 2) - (loadingSize.width / 2),
@@ -176,7 +176,7 @@ var GameOverScreen = me.ScreenObject.extend(
 
 		// buttons
 		this.restart = new Button("restart", me.state.PLAY, 280);
-		this.menu = new Button("menu", me.state.MENU, 330);
+		//this.menu = new Button("menu", me.state.MENU, 330);
 	},
 
 	/*
@@ -186,17 +186,17 @@ var GameOverScreen = me.ScreenObject.extend(
 	{
 		// draw buttons
 		this.restart.draw(context);
-		this.menu.draw(context);
+		//this.menu.draw(context);
 
 		// draw end label
-		var endText = "Level completed !";
+		var endText = "Вы можете лучше!";
 		var endSize = this.end.measureText(context, endText);
 
 		this.end.draw(context, endText,
 			me.video.getWidth() / 2 - endSize.width / 2, 120);
 
 		// draw score label
-		var scoreText = "Score : " + this.finalScore;
+		var scoreText = "Очки : " + this.finalScore;
 		var scoreSize = this.score.measureText(context, scoreText);
 
 		this.score.draw(context, scoreText,
@@ -210,6 +210,6 @@ var GameOverScreen = me.ScreenObject.extend(
 	{
 		// release mouse event
 		me.input.releasePointerEvent("mousedown", this.restart);
-		me.input.releasePointerEvent("mousedown", this.menu);
+		//me.input.releasePointerEvent("mousedown", this.menu);
 	}
 });

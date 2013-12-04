@@ -59,7 +59,7 @@ var ScoreObject = me.HUD_Item.extend(
 	 */
 	draw: function(context, x, y)
 	{
-		var scoreText = "Score : " + this.value;
+		var scoreText = "Очки : " + this.value;
 		var scoreSize = this.score.measureText(context, scoreText);
 
 		this.score.draw(context, scoreText, 3, 3);
