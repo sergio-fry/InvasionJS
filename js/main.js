@@ -5,39 +5,39 @@
 // game resources
 var g_resources = [
 	// parallax background
-	{name: "bkg0", type:"image", src: "img/bg.jpg"},
-	{name: "bkg1", type:"image", src: "img/bg2.png"},
+	{name: "bkg0", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/bg.jpg"},
+	{name: "bkg1", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/bg2.png"},
 
 	// interface
-	{name: "title", type:"image", src: "img/title.png"},
-	{name: "play", type:"image", src: "img/play.png"},
-	{name: "play_hover", type:"image", src: "img/play_hover.png"},
-	{name: "restart", type:"image", src: "img/play.png"},
-	{name: "restart_hover", type:"image", src: "img/play_hover.png"},
-	{name: "menu", type:"image", src: "img/menu.png"},
-	{name: "menu_hover", type:"image", src: "img/menu_hover.png"},
+	{name: "title", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/title.png"},
+	{name: "play", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/play.png"},
+	{name: "play_hover", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/play_hover.png"},
+	{name: "restart", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/play.png"},
+	{name: "restart_hover", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/play_hover.png"},
+	{name: "menu", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/menu.png"},
+	{name: "menu_hover", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/menu_hover.png"},
 
 	// life
-	{name: "life0", type:"image", src: "img/life0.png"},
-	{name: "life1", type:"image", src: "img/life1.png"},
-	{name: "life2", type:"image", src: "img/life2.png"},
-	{name: "life3", type:"image", src: "img/life3.png"},
+	{name: "life0", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/life0.png"},
+	{name: "life1", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/life1.png"},
+	{name: "life2", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/life2.png"},
+	{name: "life3", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/life3.png"},
 
 	// game
-	{name: "ship", type:"image", src: "img/ship.png"},
+	{name: "ship", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/ship.png"},
 
-	{name: "enemy", type:"image", src: "img/enemy.png"},
-	{name: "enemy2", type:"image", src: "img/enemy2.png"},
-	{name: "enemy3", type:"image", src: "img/enemy3.png"},
+	{name: "enemy", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/enemy.png"},
+	{name: "enemy2", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/enemy2.png"},
+	{name: "enemy3", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/enemy3.png"},
 
-	{name: "missile", type:"image", src: "img/missile.png"},
-	{name: "implosion", type:"image", src: "img/implosion.png"},
+	{name: "missile", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/missile.png"},
+	{name: "implosion", type:"image", src: "//sergio-fry.github.io/InvasionJS/img/implosion.png"},
 
 	// audio
-	{name: "clash", type:"audio", src: "sound/", channel: 1},
-	{name: "missile", type:"audio", src: "sound/", channel: 5},
-	{name: "implosion", type:"audio", src: "sound/", channel: 3},
-	{name: "theme", type:"audio", src: "sound/", channel: 4}
+	{name: "clash", type:"audio", src: "//sergio-fry.github.io/InvasionJS/sound/", channel: 1},
+	{name: "missile", type:"audio", src: "//sergio-fry.github.io/InvasionJS/sound/", channel: 5},
+	{name: "implosion", type:"audio", src: "//sergio-fry.github.io/InvasionJS/sound/", channel: 3},
+	{name: "theme", type:"audio", src: "//sergio-fry.github.io/InvasionJS/sound/", channel: 4}
 ];
 
 

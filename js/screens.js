@@ -10,7 +10,7 @@ var LoadingScreen = me.ScreenObject.extend(
 	{
 		this.parent(true);
 		this.bg = new Image();
-		this.bg.src = "img/bkg0.png";
+		this.bg.src = "//sergio-fry.github.io/InvasionJS/img/bkg0.png";
 		this.loading = new me.Font("Verdana", 20, "white");
 	},
 
