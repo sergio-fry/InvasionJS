@@ -107,12 +107,14 @@ var PlayScreen = me.ScreenObject.extend(
 	 */
 	onResetEvent: function()
 	{
-
-    me.audio.stop("theme");
-    me.audio.play("theme");
-
 		// add a default HUD
 		me.game.addHUD(0, 0, me.video.getWidth(), 45);
+
+    if(!me.game.HUD.getItemValue("theme_started")) {
+      me.audio.play("theme");
+    }
+
+    me.game.HUD.updateItemValue("theme_started", true);
 
 		// add a new HUD item
 		me.game.HUD.addItem("life", new LifeObject(3));
